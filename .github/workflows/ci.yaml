@@ -40,5 +40,5 @@ jobs:
       - name: "Docker Pull and Restart Docker"
         run: |
           ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull newa77/devops-assign'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop devops-index && docker rm devops-index'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop devops-index || true && docker rm devops-index || true'
           ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name devops-index -p 80:80 -d newa77/devops-assign'
