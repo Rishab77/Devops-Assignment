@@ -1,4 +1,5 @@
 name: "Deploy to Server"
+
 on:
   push:
       branches:
@@ -15,9 +16,9 @@ jobs:
 
       - name: "Build Docker Image"
         run: |
-          docker login -u newa77 -p $DOCKERHUB_PAT
-          docker build -t newa77/devops-assign .
-          docker push newa77/devops-assign
+          docker login -u Rishab77 -p $DOCKERHUB_PAT
+          docker build -t Rishab77/mynginx .
+          docker push Rishab77/mynginx
         env:
           DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PAT }}
 
@@ -39,6 +40,6 @@ jobs:
 
       - name: "Docker Pull and Restart Docker"
         run: |
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull newa77/devops-assign'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop devops-index || true && docker rm devops-index || true'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name devops-index -p 80:80 -d newa77/devops-assign'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull Rishab77/mynginx'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop mynginx && docker rm mynginx'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name mynginx -p 80:80 -d Rishab77/mynginx'
